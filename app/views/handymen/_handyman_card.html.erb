@@ -1,0 +1,26 @@
+<div class="col-5 text-center profile-card">
+  <%= cl_image_tag(@handyman.user.photo.key) %>
+  <h1><%= @handyman.user.full_name%></h1>
+  <%= '<i class="fas fa-solid fa-star"></i>'.html_safe * @handyman.avr_rating %>
+  <% if @handyman.rating_count.zero? %>
+    <p> No reviews yet</p>
+  <% else %>
+    <p>Reviews: <%= @handyman.rating_count %></p>
+  <% end %>
+  <i class="fas fa-location-arrow"></i>
+  <p><%= @handyman.location %></p>
+  <i class="fas fa-address-card"></i>
+  <p><%= @handyman.description %></p>
+  <% @handyman.skills.each do |skill| %>
+    <div class="skill-card">
+      <h3><%= skill.name %>-<small><%= skill.level %></small></h3>
+      <p><%= skill.description %></p>
+    </div>
+  <% end %>
+  <%= link_to "Book", new_handyman_appointment_path(@handyman), class:"btn btn-info" %>
+  <% if @handyman.chatrooms.where(user_id: current_user.id).present? %>
+    <%= link_to "Arrange details", chatroom_path(@handyman.chatrooms.where(user_id: current_user.id).first), class:"btn btn-info" %>
+  <% else %>
+    <%= link_to "Arrange details", handyman_chatrooms_path(@handyman), method:"post", class:"btn btn-info" %>
+  <% end %>
+</div>

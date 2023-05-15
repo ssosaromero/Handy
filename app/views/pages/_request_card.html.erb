@@ -1,0 +1,18 @@
+<div class="profile-card">
+  <div>
+    <div class="m-1">
+      <i class="fas fal fa-address-card"></i><%= " " + a.user.full_name %>
+    </div>
+    <div class="m-1">
+      <i class="fas fa-info"></i><%= " " + a.description %>
+    </div>
+    <div class="m-1">
+      <i class="fas fal fa-calendar-alt"></i><%= " " + a.date.strftime('%B %e, %Y') %>
+    </div>
+  </div>
+  <p>Status: <strong><%= a.status %></strong></p>
+  <% if a.status == "Pending" %>
+    <%= link_to 'Accept', accept_appointment_path(a), method: :put, class: "btn btn-secondary"%>
+    <%= link_to 'Reject', reject_appointment_path(a), method: :put, class: "btn btn-secondary"%>
+  <% end %>
+</div>

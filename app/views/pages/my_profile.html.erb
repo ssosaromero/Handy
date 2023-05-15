@@ -1,0 +1,145 @@
+<div class="container">
+  <div class="d-flex justify-content-center mt-2 img-my-profile" style="border-radius: 20px;">
+    <div class="img-show" style="margin: 78px 0px 0px 0px;">
+        <%= cl_image_tag(current_user.photo.key) %>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div style="display: grid;" class="mt-5">
+    <div class="row">
+      <div class="col-7">
+        <h3 class="d-flex">My Profile</h3>
+        <br>
+        <div class="d-flex">
+          <h3><%= @user.full_name %></h3>
+        </div>
+        <div>
+          <div class="m-2">
+          <i class="fas fa-solid fa-envelope"> </i> <%= @user.email %>
+          </div>
+          <p>Member since: <%= @user.created_at.strftime('%B %e, %Y') %></p>
+          <% unless @user.is_handyman? %>
+            <%= link_to "Create your Handy profile", new_handyman_path(@user), class:"btn btn-secondary", style:"margin: 0px 0 36px 0px; background: #F4E1A6; border: none; color: black;" %>
+          <% end %>
+        </div>
+        <div class="d-flex justify-content-end" style="margin-top: -51px;">
+          <%= link_to edit_user_registration_path do %>
+            <i class="fas fa-pen-square fa-lg" style="color: #6c757d; margin: 0px 0px 0px 16px;"></i>
+          <% end %>
+        </div>
+        <!-- linea -->
+        <div class="linea"></div>
+        <% if @user.is_handyman? %>
+        <div class="d-flex">
+          <h4 style="margin: 30px 50px 0px 0px;">My Handyman Profile</h4>
+        </div>
+         <p style="margin: 0;"><i class="fas fa-map-marker-alt"></i> <%= @user.handyman.location %></p>
+        <br>
+        <% if @user.handyman.rating_count.zero? %>
+          <p style="margin: 0;"> No reviews yet</p>
+        <% else %>
+           <p style="margin: 0;">Reviews: (<%= @user.handyman.rating_count %>) <%= '<i class=" text-align-center fas fa-solid fa-star"></i>'.html_safe * @user.handyman.avr_rating %></p>
+        <% end %>
+
+         <p style="margin: 0;"><%= @user.handyman.description %></p>
+
+        <div class="d-flex justify-content-end" style="margin-top: -35px;">
+          <div style="margin: 2px;">
+         <%= link_to @user.handyman, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="fas fa-trash fa-lg" style="color: #6c757d; margin: 0px 0px 0px 16px;"></i>
+          <% end %>
+          </div>
+          <div style="margin: 2px;">
+          <%= link_to edit_handyman_path(@user.handyman) do %>
+          <i class="fas fa-pen-square fa-lg" style="color: #6c757d; margin: 0px 0px 0px 16px;"></i>
+          <% end %>
+          </div>
+        </div>
+
+        <div class="linea"></div>
+
+        <div>
+          <div class="d-flex justify-content-between">
+            <h4 style="margin: 30px 50px 0px 0px;">My Skills</h4>
+            <%= link_to 'Add Skill', new_handyman_skill_path(@user.handyman), class:"btn btn-info", style:"margin-top: 23px;" %>
+          </div>
+          <br>
+          <% @user.handyman.skills.each do |skill| %>
+
+          <p class= "<%=badges_for_skills(skill.name) %> mb-0 icons-show" style="margin: 0;"> <%= icons_for_skills(skill.name) %><%= skill.name %></p>
+          <div class="d-flex">
+            <p style="margin: 0;"><%= skill.name %> - <%= skill.level %></p>
+            <div>
+            <%= link_to skill, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i class="fas fa-trash fa-lg" style="color: #6c757d; margin: 0px 0px 0px 16px;"></i>
+              <% end %>
+            </div>
+            <div>
+            <%= link_to edit_skill_path(skill) do %>
+              <i class="fas fa-pen-square fa-lg" style="color: #6c757d; margin: 0px 0px 0px 16px;"></i>
+              <% end %>
+            </div>
+          </div>
+            <p><%= skill.description %></p>
+          <% end %>
+        </div>
+        <% end %>
+      </div>
+
+
+      <div class="col-5">
+        <%# INFO RESERVAS USUARIO %>
+        <div class="col-md text-center">
+          <h4>My Appointments  <i class="fas fa-chevron-down fa-xs" style="color: #6c757d"></i></h4>
+          <% @user.appointments.each do |a| %>
+            <div class="card-profile">
+              <%= link_to handyman_path(a.handyman) do %>
+                <h5><strong><i class="fas fa-wrench"></i></strong> <%= a.handyman.user.full_name %></h5>
+              <% end %>
+              <p><i class="fas fa-clipboard-list"></i> - <%= a.description %></p>
+              <p><i class="fas fa-clipboard-list"></i> - <%= a.date.strftime('%B %e, %Y') %></p>
+
+              <% if a.reviewed? %>
+                <p><strong class="status">Reviewed <i class="fas fa-check-circle"></i></strong></p>
+              <% else %>
+                <p><strong class="status"><%= a.status %></strong></p>
+              <% end %>
+
+              <% if a.status == "Accepted" %>
+                <% if !a.reviewed? %>
+                  <p class="mb-3"><%= link_to 'Leave a review', new_appointment_review_path(a), class:"status" %></p>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <%# INFO HANDYMAN REQUEST %>
+        <% if @user.handyman %>
+          <div class="col-md text-center">
+            <h4>My Requests  <i class="fas fa-chevron-down fa-xs" style="color: #6c757d"></i></h4>
+            <% @user.handyman.appointments.each do |a| %>
+              <div class="card-profile">
+                <div>
+                  <h5><i class="fas fa-user"></i>   <%= a.user.full_name %></h5>
+                  <p><i class="fas fa-clipboard-list"></i> <%= " - " + a.description %></p>
+                  <p><i class="fas fa-calendar-alt"></i> <%= " - " + a.date.strftime('%B %e, %Y') %></p>
+                </div>
+                <% if a.status == "Pending" %>
+                  <%= link_to 'Accept', accept_appointment_path(a), method: :put, class: "btn btn-secondary"%>
+                  <%= link_to 'Reject', reject_appointment_path(a), method: :put, class: "btn btn-secondary"%>
+                <% else %>
+                  <p class="m-3"><strong class="status"><%= a.status %></strong></p>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'shared/footer' %>

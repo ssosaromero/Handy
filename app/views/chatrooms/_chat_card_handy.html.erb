@@ -1,0 +1,6 @@
+<%= link_to chatroom_path(chat) do %>
+  <div class="chat-card">
+    <%= cl_image_tag(chat.user.photo.key) %>
+    <span><strong>👤</strong> <%= chat.user.full_name %></span>
+  </div>
+<% end %>

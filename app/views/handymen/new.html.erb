@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-4 mt-5">
+      <div class="card mx-auto p-4">
+        <%= simple_form_for(@handyman) do |f|  %>
+          <%= f.input :description %>
+          <%= f.input :location %>
+          <div class="d-flex justify-content-center">
+          <%= f.submit class:"btn btn-secondary", style:"background: #F4E1A6; border: none; color: black;"%>
+          </div>
+        <% end %>
+
+      <div class="m-5 d-flex justify-content-center">
+        <%= link_to my_profile_path do %>
+          <i class="fas fa-arrow-left fa-2x"></i>
+        <% end %>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

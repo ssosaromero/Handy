@@ -1,0 +1,36 @@
+<div class="card">
+  <div class="background">
+    <%= cl_image_tag(handyman.user.photo.key, :gravity=>"faces", :crop=>"thumb", class:"img card-img-top") %>
+  </div>
+  <% if handyman.reviews.empty? %>
+    <div>
+      <p class="review"> <%= '<i class="fas fa-comment-slash"></i>'.html_safe %> </p>
+    </div>
+  <% else %>
+    <p class="review"><%= '<i class="fas fa-solid fa-star"></i>'.html_safe * handyman.avr_rating %> (<%= handyman.rating_count %>) </p>
+  <% end %>
+  <div class="card-body">
+    <div class="d-flex justify-content-center text-center row">
+      <h5 class="card-info"><%= handyman.user.full_name %></h5>
+      <div class="d-flex flex-wrap justify-content-center p-2">
+        <% handyman.skills.each do |skill| %>
+          <div class="skill m-1">
+            <div class= "<%=badges_for_skills(skill.name) %> mb-1">
+              <%= icons_for_skills(skill.name) %>
+              <%= skill.name %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="text-center mt-auto">
+      <div>
+        <p><i class="card-info fas fa-map-marker-alt me-3"></i><%= handyman.location %></p>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer d-flex">
+    <%= link_to "Info", handyman_path(handyman.id), class:"me-3 w-50 btn btn-outline-dark" %>
+    <%= link_to "Book", new_handyman_appointment_path(handyman.id), class:"w-50 btn btn-info" %>
+  </div>
+</div>

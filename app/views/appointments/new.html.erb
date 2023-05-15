@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row justify-content-center align-items-center bg-white rounded-5 py-5 px-3" style="margin-top: 150px; border-radius: 10px; box-shadow: 1px 1px 5px rgb(0 0 0 / 17%);">
+    <div class="col-md-9">
+      <h1 style="text-align: center"> New appointment with <%= @handyman.user.first_name %></h1>
+      <%= simple_form_for [@handyman, @appointment], html: { class: "position-relative"} do |f|  %>
+        <%= f.input :date %>
+        <%= f.input :description %>
+        <%= f.input :skill, :collection => @handyman.skills %>
+        <%= f.submit "Book", class:"btn-appointment-new position-absolute px-3 btn btn-outline-dark"%>
+      <% end %>
+
+      <%= link_to 'Back', root_path, class:"px-5 btn btn-info mt-2"%>
+    </div>
+  </div>
+</div>
+
+<%# FOOTER %>
+<div>
+  <%= render 'shared/footer' %>
+</div>

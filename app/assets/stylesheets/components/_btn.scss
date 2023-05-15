@@ -1,0 +1,29 @@
+.btn-sign-in {
+  display:flex;
+  height:40px;
+  width:140px;
+  font-size: 18px;
+  justify-content:center;
+  align-items:center;
+  text-decoration: none;
+  color: #F4E1A6;
+  border: 1px solid;
+  border-radius: 35px;
+  padding: 10px 15px;
+  transition-duration: 0.1ms;
+}
+
+  .btn-sign-in:hover {
+    background-color: #F4E1A6;
+    color: black;
+  }
+
+  .btn-review-new {
+    right: 0;
+    top: 204px;
+  }
+
+  .btn-appointment-new {
+    right: 0;
+    top: 341px;
+  }

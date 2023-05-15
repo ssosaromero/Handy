@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="row">
+    <%# LISTA DE CHATS %>
+    <div class="chats col-4">
+      <% if current_user.handyman %>
+        <%# muestro los 2 chats %>
+        <% @chatrooms_user.each do |chat| %>
+          <%= render 'chat_card_user', chat: chat %>
+        <% end %>
+        <% @chatrooms_handyman.each do |chat| %>
+          <%= render 'chat_card_handy', chat: chat %>
+        <% end %>
+      <% else %>
+        <%# muestro chats de usuario %>
+        <% @chatrooms_user.each do |chat| %>
+          <%= render 'chat_card_user', chat: chat %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <%# CONVERSACIÓN %>
+    <div class="col-8">
+      <div class="container rounded-3 chatroom"
+        data-controller="chatroom-subscription"
+        data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
+
+        <!-- Button trigger modal -->
+        <% unless (@chatroom.handyman.user.id == current_user.id) %>
+          <p class="btn btn-info shadow-sm mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book</p>
+        <% end %>
+
+        <%= link_to handyman_path(@chatroom.handyman) do %>
+          <span><strong>🔧</strong> <%= @chatroom.handyman.user.full_name %></span>
+        <% end %>
+        <span><strong>👤</strong> <%= @chatroom.user.full_name %></span>
+
+        <%# espacio para mensajes %>
+        <div class="messages" data-chatroom-subscription-target="messages">
+          <% @chatroom.messages.each do |message| %>
+            <%= render "messages/message", message: message %>
+          <% end %>
+        </div>
+
+        <%# Form para mandar mensajes %>
+        <%= simple_form_for [@chatroom, @message], #formulario nesteado
+          remote: true, #enviar formulario por AJAX
+          html: {data: {action: "ajax:success->chatroom-subscription#resetForm"}, class: "d-flex" } do |f| %>
+          <%= f.input :content,
+            label: false,
+            placeholder: "Message ##{@chatroom.name}",
+            wrapper_html: {class: "flex-grow-1"} # agrega una clase
+          %>
+          <%= f.submit "Send", class: "ms-3 btn btn-info shadow-sm" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="border-radius: 10px">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">New appointment with <%= @chatroom.handyman.user.first_name %></h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="formulario">
+          <%= simple_form_for [@chatroom.handyman, @appointment] do |f|  %>
+            <%= f.input :date %>
+            <%= f.input :description %>
+            <%= f.input :skill, :collection => @chatroom.handyman.skills %>
+            <div class="btn-submit-2">
+            <div class="d-flex justify-content-center"><%= f.submit %></div>
+            </div>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

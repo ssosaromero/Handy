@@ -1,0 +1,19 @@
+<div class="info-window">
+  <%# IMAGE %>
+  <%= link_to handyman_path(handyman.id) do %>
+    <%= cl_image_tag(handyman.user.photo.key, :gravity=>"faces", :crop=>"thumb") %>
+  <% end %>
+
+  <%# NAME %>
+  <h6><%= handyman.user.full_name %></h6>
+
+  <%# SKILLS %>
+  <% handyman.skills.each do |skill| %>
+    <div class="skill m-1">
+      <div class= "<%=badges_for_skills(skill.name) %> mb-1">
+        <%= icons_for_skills(skill.name) %>
+        <%= skill.name %>
+      </div>
+    </div>
+  <% end %>
+</div>

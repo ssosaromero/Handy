@@ -1,0 +1,13 @@
+<div class="profile-card">
+  <%= link_to handyman_path(a.handyman) do %>
+    <p>Handyman: <%= a.handyman.user.full_name %></p>
+  <% end %>
+  <p>Description: <%= a.description %></p>
+  <p>When: <%= a.date.strftime('%B %e, %Y') %></p>
+  <p>Status: <strong><%= a.status %></strong></p>
+  <% if a.status == "Accepted" %>
+    <% if !a.reviewed? %>
+      <%= link_to 'Leave a review', new_appointment_review_path(a), class:"btn btn-info"%>
+    <% end %>
+  <% end %>
+</div>

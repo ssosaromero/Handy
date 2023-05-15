@@ -1,0 +1,14 @@
+<div class="profile-card">
+  <%= cl_image_tag(current_user.photo.key) %>
+  <h1><%= @user.full_name %></h1>
+  <i class="fas fa-solid fa-envelope"> </i> <%= @user.email %>
+  <p>Reviews: <%= @reviews_user.count %></p>
+
+  <p>Member since: <%= @user.created_at.strftime('%B %e, %Y') %></p>
+  <%= link_to edit_user_registration_path, class:"btn btn-secondary" do %>
+    <i class="fas fa-user-edit"></i>
+  <% end %>
+  <% unless @user.is_handyman? %>
+    <%= link_to "Create your Handy profile", new_handyman_path(@user), class:"btn btn-secondary" %>
+  <% end %>
+</div>

@@ -1,0 +1,25 @@
+<div class="profile-card">
+  <%= '<i class=" text-align-center fas fa-solid fa-star"></i>'.html_safe * @user.handyman.avr_rating %>
+  <% if @user.handyman.rating_count.zero? %>
+    <p> No reviews yet</p>
+  <% else %>
+    <p>Reviews: <%= @user.handyman.rating_count %></p>
+  <% end %>
+  <i class="fas fa-location-arrow"></i>
+  <p><%= @user.handyman.location %></p>
+  <i class="fas fa-address-card"></i>
+  <p><%= @user.handyman.description %></p>
+  <%= link_to edit_handyman_path(@user.handyman), class:"btn btn-info" do %>
+    <i class="fas fa-edit"></i>
+  <% end %>
+  <%= link_to 'Add Skill', new_handyman_skill_path(@user.handyman), class:"btn btn-info"%>
+  <%= link_to 'Delete Handyman', @user.handyman, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-info"%>
+
+  <% @user.handyman.skills.each do |skill| %>
+    <p><%= skill.name %> - <%= skill.level %></p>
+    <p><%= skill.description %></p>
+
+    <%= link_to 'Edit Skill', edit_skill_path(skill), class:"btn btn-info"%>
+    <%= link_to 'Delete Skill', skill, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-info" %>
+  <% end %>
+</div>

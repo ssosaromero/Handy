@@ -1,0 +1,191 @@
+.body {
+  background: #ddd;
+}
+
+.card-body{
+  flex: 1 1 auto;
+  padding: 0rem 1rem;
+}
+
+.profile-area {
+  padding: 0 0;
+}
+
+.background {
+  background-color: #305349;
+  height: 130px;
+  position: relative;
+  margin-bottom: 60px;
+}
+
+/* @media only screen and (max-width: 600px) {
+  .background {
+    background-color: red;
+  }
+} */
+
+.card{
+  box-shadow: 1px 1px 10px lightgrey;
+  overflow: hidden;
+  border-radius: 15px;
+  width: 90%;
+  height: 480px;
+  margin: 0 auto;
+}
+
+.img{
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: block;
+  margin: 20px auto 20px;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 5px solid #F4E1A6; //#fff
+  object-fit: cover;
+}
+
+.review {
+  text-align: center;
+  margin-top: 10px;
+  color: #305349;
+}
+
+.badge {
+  border-radius: 15px;
+
+  i {
+    margin-right: 5px;
+  }
+}
+
+.btn {
+  border-radius: 15px;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.card-info {
+  margin-left: 15px;
+}
+
+.level{
+  margin-top: 5px;
+}
+
+.container {
+  margin-bottom: 40px;
+}
+
+.handyman-card {
+  width: 330px;
+  border: 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 5px 1px #888888;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px 0px;
+}
+
+.card-img {
+  text-align: center;
+
+  img {
+    height: 120px;
+  }
+}
+
+.skills {
+  background-color: grey;
+  border-radius: 5px;
+  padding: 5px;
+
+  p {
+    margin: 0px;
+  }
+}
+
+.division {
+  background-color: white;
+  width: 5px;
+  height: 120px;
+  margin: 0px 5px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px 0px;
+  margin-bottom: 16px;
+}
+
+.btn-info {
+  background-color: #F4E1A6 !important;
+  border-color: #F4E1A6 !important;
+}
+// Smallest device
+@media (min-width: 100px) and (max-width: 575px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    width: 75%;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 0;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+
+
+.appointment {
+  background: white;
+  border-radius: 30px;
+  margin-left: -10px;
+  margin-top: -29px;
+  height: 477px;
+}
+
+.img-show {
+  img {
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  }
+}

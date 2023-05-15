@@ -1,0 +1,95 @@
+<div class="empty-chat">
+  <div class="container">
+    <% if current_user.handyman %>
+      <% unless current_user.chatrooms.empty? && current_user.handyman.chatrooms.empty? %>
+        <div class="mt-5 row">
+          <%# LISTA DE CHATS %>
+          <div class="chats col-4">
+            <% if current_user.handyman %>
+              <%# muestro los 2 chats %>
+              <% @chatrooms_user.each do |chat| %>
+                <%= render 'chat_card_user', chat: chat %>
+              <% end %>
+              <% @chatrooms_handyman.each do |chat| %>
+                <%= render 'chat_card_handy', chat: chat %>
+              <% end %>
+            <% else %>
+              <%# muestro chats de usuario %>
+              <% @chatrooms_user.each do |chat| %>
+                <%= render 'chat_card_user', chat: chat %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="col-8">
+            <div class="chatroom">
+
+              <h1>Select conversation</h1>
+
+              <%# espacio para mensajes %>
+              <div class="messages">
+                <p></p>
+              </div>
+
+              <%# Form para mandar mensajes %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="empty-mailbox" style= "margin-left: 170px; margin-top: 40px;">
+          <h3> <%= current_user.first_name %> it looks like you don't have any messages yet</h3>
+          <%= link_to  handymen_path do %>
+            <i class="d-flex fas fa-arrow-left" style="justify-content: end;"> <h4>back</h4> </i>
+          <% end %>
+          <%= image_tag "empty_icon.png" %>
+        </div>
+      <% end %>
+    <% else %>
+      <% unless current_user.chatrooms.empty? %>
+        <div class="mt-5 row">
+          <%# LISTA DE CHATS %>
+          <div class="chats col-4">
+            <% if current_user.handyman %>
+              <%# muestro los 2 chats %>
+              <% @chatrooms_user.each do |chat| %>
+                <%= render 'chat_card_user', chat: chat %>
+              <% end %>
+              <% @chatrooms_handyman.each do |chat| %>
+                <%= render 'chat_card_handy', chat: chat %>
+              <% end %>
+            <% else %>
+              <%# muestro chats de usuario %>
+              <% @chatrooms_user.each do |chat| %>
+                <%= render 'chat_card_user', chat: chat %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="col-8">
+            <div class="chatroom">
+
+              <h1>Select conversation</h1>
+
+              <%# espacio para mensajes %>
+              <div class="messages">
+                <p></p>
+              </div>
+
+              <%# Form para mandar mensajes %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="empty-mailbox" style= "margin-left: 170px; margin-top: 40px;">
+          <h3> <%= current_user.first_name %> it looks like you don't have any messages yet</h3>
+          <%= link_to  handymen_path do %>
+            <i class="d-flex fas fa-arrow-left" style="justify-content: end;"> <h4>back</h4> </i>
+          <% end %>
+          <%= image_tag "empty_icon.png" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+
+
+    <%# CONVERSACIÓN %>

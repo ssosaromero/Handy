@@ -1,0 +1,81 @@
+
+<div>
+  <div class="landing_top mt-0"  >
+    <div class="banner">
+      <div class="sign in d-flex justify-content-end m-3">
+        <% if user_signed_in? %>
+          <%= render 'shared/navbar_home' %>
+        <% else %>
+          <%= link_to "Sign in", new_user_session_path, class: "btn-sign-in mt-3" %>
+        <% end %>
+      </div>
+
+      <div class="container">
+        <h1 class="h1-title" >Handy</h1>
+        <h2 style="margin-left: 20px;">Solutions at hand</h2>
+        <div>
+          <%= simple_form_for :search, url: handymen_path, method: :get do |f| %>
+            <div class="form-group mt-5">
+              <input class="grow text-center border-0 shadow " type="text" name="search[query]" style="width: 400px; height: 40px; border-radius: 23px; background: rgb(206 220 207 / 18%)" placeholder="Find a Handy!"/>
+              <button type="submit" class="btn-submit">
+                <i class="fas fa-search fa-2x" style="color: #305349;"></i>
+              </button>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%# HOW IT WORKS %>
+<div class="bg-white py-5">
+  <div class="container">
+    <div class="knowhow mt-5">
+      <h3> How <strong>it works</strong></h3>
+      <p> Find the most qualified person to help you at home</p>
+    </div>
+    <div class="row how-it-works">
+      <div class="col-md-4 mt-6">
+        <div class="card text-center" style="height: 350px">
+          <img src="https://cdn.dribbble.com/users/1231153/screenshots/3433207/media/c9b2d44c27615cdb11487e792f4f7c03.gif" style="width: 100%;" alt="Pipe Burst">
+          <h4>Need a fix?</h4>
+        </div>
+      </div>
+
+      <div class="col-md-4 mt-6">
+        <div class="card text-center" style="height: 350px">
+          <img src="https://cdn.dribbble.com/users/12427466/screenshots/18761128/media/49deef9fb0a64fa9f136cf8aa76dbd1b.gif" style="width: 100%;" alt="Find handy">
+          <h4>Search by location or skill</h4>
+        </div>
+      </div>
+
+      <div class="col-md-4 mt-6">
+        <div class="card text-center" style="height: 350px">
+          <img src="https://cdn.dribbble.com/users/537878/screenshots/3517803/media/aab41504d52402e113194ee599fc71da.gif" style="width: 100%;" alt="Found">
+          <h4>Find the right Handy</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%# CARDS SPACE %>
+<div class="container" style="margin-top: 150px">
+  <div class="knowhow my-5">
+    <h3> Meet your ideal <strong>Handy</strong></h3>
+    <p> Get in contact, book your appointment and solve all your problems at home</p>
+  </div>
+  <div class="row">
+    <% @handyman.each do |handyman|%>
+      <div class="col-md-4">
+        <%= render 'shared/handyman_card', handyman: handyman %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%# FOOTER %>
+<div>
+  <%= render 'shared/footer' %>
+</div>

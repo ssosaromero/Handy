@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row justify-content-center align-items-center bg-white rounded-5 py-5 px-3" style="margin-top: 150px; border-radius: 10px; box-shadow: 1px 1px 5px rgb(0 0 0 / 17%);">
+    <div class="col-md-9">
+      <h1 style="text-align: center"> New review for <%= @appointment.handyman.user.first_name %></h1>
+      <%= simple_form_for [@appointment, @review], html: { class: "position-relative"} do |f|  %>
+        <%= f.input :stars, :collection => 1..5 %>
+        <%= f.input :content %>
+        <%= f.submit "Leave a review", class:"btn-review-new position-absolute px-3 btn btn-outline-dark"%>
+      <% end %>
+      <%= link_to 'Back', handyman_path(@appointment.handyman), class:"px-5 btn btn-info mt-2" %>
+    </div>
+  </div>
+</div>
+
+<%# FOOTER %>
+<div>
+  <%= render 'shared/footer' %>
+</div>

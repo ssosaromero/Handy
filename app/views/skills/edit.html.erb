@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-4 mt-5">
+      <div class="card mx-auto p-4">
+        <%= simple_form_for [@handyman, @skill] do |f|  %>
+          <%= f.input :name, :collection => %w[Carpenter Plumber Blacksmith Electrician Gasfitter Turner Bricklayer Painter] %>
+          <%= f.input :level, :collection => %w[Amateur Advanced Technical Professional] %>
+          <%= f.input :description %>
+          <div class="d-flex justify-content-center">
+          <%= f.submit class:"btn btn-secondary", style:"background: #F4E1A6; border: none; color: black;"%>
+          </div>
+        <% end %>
+
+        <div class="m-2 d-flex justify-content-center">
+        <%= link_to my_profile_path do %>
+          <i class="fas fa-arrow-left fa-2x"></i>
+        <% end %>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
