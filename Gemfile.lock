@@ -101,6 +101,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dockerfile-rails (1.2.5)
+      rails
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.7.6)
@@ -289,6 +291,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   cloudinary (~> 1.16.0)
   devise
+  dockerfile-rails
   dotenv-rails
   font-awesome-sass (~> 5.6.1)
   geocoder
@@ -313,7 +316,7 @@ DEPENDENCIES
   webpacker (~> 5.0)
 
 RUBY VERSION
-   ruby 3.0.3p157
+   ruby 3.0.6p216
 
 BUNDLED WITH
    2.3.10
