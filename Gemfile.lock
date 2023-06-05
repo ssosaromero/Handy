@@ -143,6 +143,10 @@ GEM
     mini_portile2 (2.8.2)
     minitest (5.16.1)
     msgpack (1.5.2)
+    net-protocol (0.2.1)
+      timeout
+    net-smtp (0.3.3)
+      net-protocol
     netrc (0.11.0)
     nio4r (2.5.8)
     nokogiri (1.13.6)
@@ -246,6 +250,7 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.2.1)
     tilt (2.0.10)
+    timeout (0.3.2)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -297,6 +302,7 @@ DEPENDENCIES
   geocoder
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  net-smtp
   pg (~> 1.1)
   pg_search (~> 2.3.0)
   pry-byebug
@@ -316,7 +322,7 @@ DEPENDENCIES
   webpacker (~> 5.0)
 
 RUBY VERSION
-   ruby 3.0.6p216
+   ruby 3.1.2p20
 
 BUNDLED WITH
    2.3.10
